@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { FiCheckSquare, FiLogIn } from "react-icons/fi";
+import { FiLayers, FiLogIn } from "react-icons/fi";
 
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
@@ -8,7 +8,7 @@ export default function AuthPage() {
       {/* Left Section */}
       <div className="hidden md:flex md:flex-1 justify-center items-center overflow-hidden">
         <img
-          src="/login-page-image.webp"
+          src="/login-page-image.png"
           alt="image for login page"
           className="w-full h-full object-cover object-center"
         />
@@ -18,11 +18,11 @@ export default function AuthPage() {
         <div className=" h-[60%] w-[90%] max-w-md md:w-[60%] flex flex-col gap-4">
           {/* Icon and Title */}
           <div className="flex flex-col justify-center items-center gap-1">
-            <FiCheckSquare size={32} className="text-(--color-primary)" />
-            <h1 className="text-2xl font-semibold">Todo Manager</h1>
+            <FiLayers size={32} className="text-(--color-primary)" />
+            <h1 className="text-2xl font-semibold">Task Board</h1>
           </div>
           {/* Toggle button */}
-          <div className="bg-[#dae4e491] p-1 flex gap-2 justify-center rounded-(--btn-radius)">
+          <div className="bg-[#95ab9891] p-1 flex gap-2 justify-center rounded-(--btn-radius)">
             <button
               className={`flex-1 p-1 rounded-(--btn-radius) cursor-pointer ${activeTab === "login" ? "bg-(--color-primary) text-(--color-surface)" : ""}`}
               onClick={() => setActiveTab("login")}
