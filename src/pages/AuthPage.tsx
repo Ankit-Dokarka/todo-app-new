@@ -4,7 +4,7 @@ export default function AuthPage() {
   return (
     <div className="flex h-dvh w-full overflow-hidden">
       {/* Left Section */}
-      <div className="flex-1 flex justify-center items-center overflow-hidden">
+      <div className="hidden md:flex md:flex-1 justify-center items-center overflow-hidden">
         <img
           src="/login-page-image.webp"
           alt="image for login page"
@@ -12,8 +12,8 @@ export default function AuthPage() {
         />
       </div>
       {/* Right Section */}
-      <div className="flex-1 flex justify-center items-center">
-        <div className=" h-[60%] w-[60%] flex flex-col gap-4">
+      <div className="flex w-full md:flex-1 justify-center items-center">
+        <div className=" h-[60%] w-[90%] max-w-md md:w-[60%] flex flex-col gap-4">
           {/* Icon and Title */}
           <div className="flex flex-col justify-center items-center gap-1">
             <FiCheckSquare size={32} className="text-(--color-primary)" />
@@ -33,16 +33,16 @@ export default function AuthPage() {
             <input
               type="email"
               id="email"
-              className="border border-gray-300 rounded-(--btn-radius) p-2"
+              className="border border-gray-300 rounded-(--btn-radius) p-2 focus:border-(--color-primary) focus:outline-none"
             />
             <label htmlFor="password">Password</label>
             <input
               type="password"
               id="password"
-              className="border border-gray-300 rounded-(--btn-radius) p-2"
+              className="border border-gray-300 rounded-(--btn-radius) p-2 focus:border-(--color-primary) focus:outline-none"
             />
 
-            <button className="border border-none p-2 mt-2  rounded-(--btn-radius) bg-(--color-primary) text-white flex justify-center items-center gap-1.5">
+            <button className="border border-none p-2 mt-2  rounded-(--btn-radius) bg-(--color-primary) text-white flex justify-center items-center gap-1.5 cursor-pointer">
               {<FiLogIn size={18} />}
               Login
             </button>
