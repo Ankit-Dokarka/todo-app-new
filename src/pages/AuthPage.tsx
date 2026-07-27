@@ -16,8 +16,11 @@ export default function AuthPage() {
   const {
     register,
     handleSubmit,
+    watch,
     formState: { errors },
   } = useForm<AuthForm>();
+
+  const password = watch("password");
 
   const onSubmit = (data: AuthForm) => {
     console.log(data);
@@ -152,6 +155,8 @@ export default function AuthPage() {
                 <input
                   {...register("conformPassword", {
                     required: "Conform password is required",
+                    validate: (value) =>
+                      value === password || "Passwords do not match",
                   })}
                   type="password"
                   id="cpassword"
@@ -168,7 +173,7 @@ export default function AuthPage() {
               type="submit"
             >
               {<FiLogIn size={18} />}
-              Login
+              {activeTab === "login" ? "Login" : "Sign Up"}
             </button>
           </form>
         </div>
