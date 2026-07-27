@@ -1,8 +1,28 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
+
 import { FiLayers, FiLogIn } from "react-icons/fi";
+
+type AuthForm = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  conformPassword: string;
+};
 
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<AuthForm>();
+
+  const onSubmit = (data: AuthForm) => {
+    console.log(data);
+  };
+
   return (
     <div className="flex h-dvh w-full overflow-hidden">
       {/* Left Section */}
@@ -22,7 +42,7 @@ export default function AuthPage() {
             <h1 className="text-2xl font-semibold">Task Board</h1>
           </div>
           {/* Toggle button */}
-          <div className="bg-[#95ab9891] p-1 flex gap-2 justify-center rounded-(--btn-radius)">
+          <div className="bg-[#bde7c191] p-1 flex gap-2 justify-center rounded-(--btn-radius)">
             <button
               className={`flex-1 p-1 rounded-(--btn-radius) cursor-pointer ${activeTab === "login" ? "bg-(--color-primary) text-(--color-surface)" : ""}`}
               onClick={() => setActiveTab("login")}
@@ -40,63 +60,112 @@ export default function AuthPage() {
           </div>
           {/* form section */}
 
-          <form className="flex flex-col gap-1">
+          <form
+            className="flex flex-col gap-1"
+            onSubmit={handleSubmit(onSubmit)}
+            noValidate
+          >
             {activeTab === "signup" && (
               <div className="flex">
                 <div className="flex flex-col flex-1">
-                  <label htmlFor="fname" className="text-[14px]">
+                  <label htmlFor="fname" className="text-[12px]">
                     First Name
                   </label>
                   <input
+                    {...register("firstName", {
+                      required: "First name is required",
+                      minLength: {
+                        value: 3,
+                        message: "Must be at least 3 characters",
+                      },
+                    })}
                     type="text"
                     id="fname"
                     className="w-[99%] border border-gray-300 rounded-(--btn-radius) p-1 focus:border-(--color-primary) focus:outline-none"
                   />
+                  <p className="text-(--color-danger) text-[10px]">
+                    {errors.firstName?.message}
+                  </p>
                 </div>
                 <div className="flex flex-col flex-1">
-                  <label htmlFor="lname" className="text-[14px]">
+                  <label htmlFor="lname" className="text-[12px]">
                     Last Name
                   </label>
                   <input
+                    {...register("lastName", {
+                      required: "Last name is required",
+                    })}
                     type="text"
                     id="lname"
                     className="w-[99%] border border-gray-300 rounded-(--btn-radius) p-1 focus:border-(--color-primary) focus:outline-none"
                   />
+                  <p className="text-(--color-danger) text-[10px]">
+                    {errors.lastName?.message}
+                  </p>
                 </div>
               </div>
             )}
-            <label htmlFor="email" className="text-[14px]">
+            <label htmlFor="email" className="text-[12px]">
               Email
             </label>
             <input
+              {...register("email", {
+                required: "Email is required",
+                pattern: {
+                  value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+                  message: "Please enter a valid email address",
+                },
+              })}
               type="email"
               id="email"
               className="border border-gray-300 rounded-(--btn-radius) p-1 focus:border-(--color-primary) focus:outline-none"
             />
-            <label htmlFor="password" className="text-[14px]">
+            <p className="text-(--color-danger) text-[10px]">
+              {errors.email?.message}
+            </p>
+            <label htmlFor="password" className="text-[12px]">
               Password
             </label>
             <input
               type="password"
               id="password"
+              {...register("password", {
+                required: "Password is required",
+                ...(activeTab === "signup" && {
+                  pattern: {
+                    value:
+                      /^(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).{6,}$/,
+                    message: "Min 6 chars, 1 uppercase, 1 number & 1 symbol",
+                  },
+                }),
+              })}
               className="border border-gray-300 rounded-(--btn-radius) p-1 focus:border-(--color-primary) focus:outline-none"
             />
+            <p className="text-(--color-danger) text-[10px]">
+              {errors.password?.message}
+            </p>
             {activeTab === "signup" && (
               <>
-                <label htmlFor="cpassword" className="text-[14px]">
+                <label htmlFor="cpassword" className="text-[12px]">
                   Conform Password
                 </label>
                 <input
+                  {...register("conformPassword", {
+                    required: "Conform password is required",
+                  })}
                   type="password"
                   id="cpassword"
                   className="border border-gray-300 rounded-(--btn-radius) p-1 focus:border-(--color-primary) focus:outline-none"
                 />
+                <p className="text-(--color-danger) text-[10px]">
+                  {errors.conformPassword?.message}
+                </p>
               </>
             )}
 
             <button
               className="border border-none p-2 mt-2  rounded-(--btn-radius) bg-(--color-primary) text-white flex justify-center items-center gap-1.5 cursor-pointer"
-              type="button"
+              type="submit"
             >
               {<FiLogIn size={18} />}
               Login
