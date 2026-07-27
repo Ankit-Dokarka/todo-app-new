@@ -1,5 +1,7 @@
+import AuthPage from "./pages/AuthPage";
+
 function App() {
-  return <h1 className="h-screen text-8xl">Hello</h1>;
+  return <AuthPage />;
 }
 
 export default App;

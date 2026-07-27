@@ -3,7 +3,7 @@
 @import "tailwindcss";
 
 :root {
-  --color-bg: #d4e4e691;
+  --color-bg: #f7f9f991;
   --color-surface: #ffffff;
   --color-navbar: #0f172a;
   --color-navbar-hover: #1e293b;
@@ -21,6 +21,8 @@
   --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
   --shadow-md:
     0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+
+  --btn-radius: 4px;
 }
 
 body {
