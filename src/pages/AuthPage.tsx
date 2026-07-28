@@ -13,6 +13,7 @@ type AuthForm = {
 
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -23,7 +24,11 @@ export default function AuthPage() {
   const password = watch("password");
 
   const onSubmit = (data: AuthForm) => {
-    console.log(data);
+    setIsLoading(true);
+    setTimeout(() => {
+      console.log(data);
+      setIsLoading(false);
+    }, 1000);
   };
 
   return (
@@ -172,8 +177,17 @@ export default function AuthPage() {
               className="border border-none p-2 mt-2  rounded-(--btn-radius) bg-(--color-primary) text-white flex justify-center items-center gap-1.5 cursor-pointer"
               type="submit"
             >
-              {<FiLogIn size={18} />}
-              {activeTab === "login" ? "Login" : "Sign Up"}
+              {isLoading ? (
+                <>
+                  <div className="w-4 h-4 border-4 border-green-500 border-t-transparent animate-spin rounded-full"></div>
+                  {activeTab === "login" ? "Loging in.." : "Signing up..."}
+                </>
+              ) : (
+                <>
+                  {<FiLogIn size={18} />}
+                  {activeTab === "login" ? "Login" : "Sign Up"}
+                </>
+              )}
             </button>
           </form>
         </div>
