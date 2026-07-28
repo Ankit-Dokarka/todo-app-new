@@ -1,15 +1,10 @@
 import { useState } from "react";
 import { useForm } from "react-hook-form";
-
 import { FiLayers, FiLogIn } from "react-icons/fi";
 
-type AuthForm = {
-  firstName: string;
-  lastName: string;
-  email: string;
-  password: string;
-  conformPassword: string;
-};
+import type { AuthForm } from "../types/auth";
+import useAuth from "../hooks/useAuth";
+import type { User } from "../types/user";
 
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
@@ -21,12 +16,23 @@ export default function AuthPage() {
     formState: { errors },
   } = useForm<AuthForm>();
 
+  const { login } = useAuth();
+
   const password = watch("password");
 
   const onSubmit = (data: AuthForm) => {
     setIsLoading(true);
+
+    const user: User = {
+      id: crypto.randomUUID(),
+      firstName: data.firstName,
+      lastName: data.lastName,
+      email: data.email,
+      password: data.password,
+    };
+
     setTimeout(() => {
-      console.log(data);
+      login(user);
       setIsLoading(false);
     }, 1000);
   };

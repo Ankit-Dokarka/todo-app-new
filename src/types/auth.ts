@@ -1,0 +1,7 @@
+export type AuthForm = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  conformPassword: string;
+};
