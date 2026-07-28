@@ -5,6 +5,7 @@ import { FiLayers, FiLogIn } from "react-icons/fi";
 import type { AuthForm } from "../types/auth";
 import useAuth from "../hooks/useAuth";
 import type { User } from "../types/user";
+import { useNavigate } from "react-router-dom";
 
 export default function AuthPage() {
   const [activeTab, setActiveTab] = useState("login");
@@ -15,6 +16,8 @@ export default function AuthPage() {
     watch,
     formState: { errors },
   } = useForm<AuthForm>();
+
+  const navigate = useNavigate();
 
   const { login } = useAuth();
 
@@ -34,6 +37,7 @@ export default function AuthPage() {
     setTimeout(() => {
       login(user);
       setIsLoading(false);
+      navigate("/dashboard");
     }, 1000);
   };
 

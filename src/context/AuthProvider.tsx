@@ -13,6 +13,7 @@ export function AuthProvider({ children }: AuthProviderProps) {
 
   const login = (data: User) => {
     setUser(data);
+    localStorage.setItem("user", JSON.stringify(data));
   };
 
   const logout = () => setUser(null);
