@@ -179,7 +179,7 @@ export default function AuthPage() {
             >
               {isLoading ? (
                 <>
-                  <div className="w-4 h-4 border-4 border-green-500 border-t-transparent animate-spin rounded-full"></div>
+                  <div className="w-4 h-4 border-4 border-green-200 border-t-transparent animate-spin rounded-full"></div>
                   {activeTab === "login" ? "Loging in.." : "Signing up..."}
                 </>
               ) : (
