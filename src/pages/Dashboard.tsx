@@ -1,3 +1,6 @@
+import useAuth from "../hooks/useAuth";
+
 export default function Dashboard() {
-  return <p>Dashboard Page</p>;
+  const { isAdmin } = useAuth();
+  return <div>{isAdmin ? <h1>admin</h1> : <h1>user</h1>}</div>;
 }
