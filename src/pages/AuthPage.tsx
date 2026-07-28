@@ -20,7 +20,6 @@ export default function AuthPage() {
   const navigate = useNavigate();
 
   const { login } = useAuth();
-  
 
   const password = watch("password");
 
